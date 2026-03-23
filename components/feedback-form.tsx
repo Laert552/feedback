@@ -57,7 +57,7 @@ export default function FeedbackForm() {
             name="name"
             type="text"
             required
-            className="w-full rounded-lg border border-slate-300 px-3 py-2 text-sm outline-none transition placeholder:text-slate-400 focus:border-slate-500 focus:ring-2 focus:ring-slate-200"
+            className="w-full rounded-lg border border-slate-300 px-3 py-2 text-sm text-black outline-none transition placeholder:text-slate-400 focus:border-slate-500 focus:ring-2 focus:ring-slate-200"
             placeholder="Jane Doe"
           />
           <FieldError message={state.errors?.name} />
@@ -71,7 +71,7 @@ export default function FeedbackForm() {
             id="email"
             name="email"
             type="email"
-            className="w-full rounded-lg border border-slate-300 px-3 py-2 text-sm outline-none transition placeholder:text-slate-400 focus:border-slate-500 focus:ring-2 focus:ring-slate-200"
+            className="w-full rounded-lg border border-slate-300 px-3 py-2 text-sm text-black outline-none transition placeholder:text-slate-400 focus:border-slate-500 focus:ring-2 focus:ring-slate-200"
             placeholder="you@example.com"
           />
           <FieldError message={state.errors?.email} />
@@ -85,7 +85,7 @@ export default function FeedbackForm() {
             id="rating"
             name="rating"
             defaultValue="5"
-            className="w-full rounded-lg border border-slate-300 bg-white px-3 py-2 text-sm outline-none transition focus:border-slate-500 focus:ring-2 focus:ring-slate-200"
+            className="w-full rounded-lg border border-slate-300 bg-white px-3 py-2 text-sm text-black outline-none transition focus:border-slate-500 focus:ring-2 focus:ring-slate-200"
           >
             {[1, 2, 3, 4, 5].map((value) => (
               <option key={value} value={value}>
