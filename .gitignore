@@ -4,6 +4,10 @@
 # Keep this file trackable
 !.gitignore
 
+# Explicitly ignore agent instruction files
+AGENTS.md
+CLAUDE.md
+
 # Keep only requested directories
 !app/
 !app/**
@@ -11,6 +15,8 @@
 !components/**
 !lib/
 !lib/**
+!public/
+!public/**
 
 # Keep only requested root files
 !eslint.config.mjs
@@ -19,4 +25,4 @@
 !package.json
 !postcss.config.mjs
 !tsconfig.json
-!yarn.lock
+
