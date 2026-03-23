@@ -14,7 +14,6 @@ export async function submitFeedback(
   _prevState: FeedbackActionState,
   formData: FormData
 ): Promise<FeedbackActionState> {
-  // Normalize all incoming values from FormData before validating.
   const name = getTrimmedValue(formData, "name");
   const email = getTrimmedValue(formData, "email");
   const feedback = getTrimmedValue(formData, "feedback");
@@ -62,7 +61,6 @@ export async function submitFeedback(
     };
   }
 
-  // Supabase insert uses the public anonymous key; RLS policies should protect writes in production.
   const { error } = await supabase.from("feedbacks").insert({
     name,
     email: email || null,
