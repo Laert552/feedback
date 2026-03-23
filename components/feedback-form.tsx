@@ -105,7 +105,7 @@ export default function FeedbackForm() {
             name="feedback"
             rows={5}
             required
-            className="w-full rounded-lg border border-slate-300 px-3 py-2 text-sm outline-none transition placeholder:text-slate-400 focus:border-slate-500 focus:ring-2 focus:ring-slate-200"
+            className="w-full rounded-lg border border-slate-300 px-3 py-2 text-sm text-black outline-none transition placeholder:text-slate-400 focus:border-slate-500 focus:ring-2 focus:ring-slate-200"
             placeholder="Tell us what you think..."
           />
           <FieldError message={state.errors?.feedback} />
