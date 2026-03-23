@@ -2,9 +2,6 @@
 
 !.gitignore
 
-AGENTS.md
-CLAUDE.md
-
 !app/
 !app/**
 !components/
@@ -21,3 +18,5 @@ CLAUDE.md
 !postcss.config.mjs
 !tsconfig.json
 
+AGENTS.md
+CLAUDE.md
