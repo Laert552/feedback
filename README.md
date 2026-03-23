@@ -1,36 +1,71 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+## Feedback Form (Next.js + Supabase)
 
-## Getting Started
+This project implements a production-ready feedback form using:
 
-First, run the development server:
+- Next.js App Router
+- Server Actions (`"use server"`)
+- Supabase JavaScript client
+- Tailwind CSS UI
+
+## 1) Environment variables
+
+Copy `.env.example` to `.env.local` and set real values:
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+cp .env.example .env.local
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Required variables:
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```env
+NEXT_PUBLIC_SUPABASE_URL=
+NEXT_PUBLIC_SUPABASE_ANON_KEY=
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## 2) Create the `feedbacks` table in Supabase
 
-## Learn More
+Run this SQL in the Supabase SQL editor:
 
-To learn more about Next.js, take a look at the following resources:
+```sql
+create extension if not exists "pgcrypto";
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+create table if not exists public.feedbacks (
+  id uuid primary key default gen_random_uuid(),
+  name text not null,
+  email text,
+  rating int not null check (rating between 1 and 5),
+  feedback text not null,
+  created_at timestamptz not null default now()
+);
+```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## 3) Run locally
 
-## Deploy on Vercel
+Install dependencies and start the dev server:
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+```bash
+npm install
+npm run dev
+```
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Open [http://localhost:3000](http://localhost:3000).
+
+## Project structure
+
+- `app/page.tsx`: page entry, renders form component.
+- `components/feedback-form.tsx`: form UI, pending state with `useFormStatus`, and status messages.
+- `app/actions/feedback.ts`: server action validation and Supabase insert logic (only exports async functions; required by Next.js `"use server"` files).
+- `lib/feedback-action-types.ts`: shared action state type and initial state for `useActionState`.
+- `lib/supabase.ts`: centralized Supabase client setup from environment variables.
+
+## Validation rules
+
+- `name` is required.
+- `feedback` is required.
+- `email` is optional but validated when provided.
+- `rating` must be an integer from 1 to 5.
+
+## Notes for production
+
+- Configure Row Level Security (RLS) policies in Supabase to allow inserts for your intended users/clients.
+- Monitor server logs for failed inserts (error details are logged in the server action).

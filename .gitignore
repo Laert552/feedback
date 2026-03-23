@@ -1,41 +1,22 @@
-# See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
+# Ignore everything by default
+*
 
-# dependencies
-/node_modules
-/.pnp
-.pnp.*
-.yarn/*
-!.yarn/patches
-!.yarn/plugins
-!.yarn/releases
-!.yarn/versions
+# Keep this file trackable
+!.gitignore
 
-# testing
-/coverage
+# Keep only requested directories
+!app/
+!app/**
+!components/
+!components/**
+!lib/
+!lib/**
 
-# next.js
-/.next/
-/out/
-
-# production
-/build
-
-# misc
-.DS_Store
-*.pem
-
-# debug
-npm-debug.log*
-yarn-debug.log*
-yarn-error.log*
-.pnpm-debug.log*
-
-# env files (can opt-in for committing if needed)
-.env*
-
-# vercel
-.vercel
-
-# typescript
-*.tsbuildinfo
-next-env.d.ts
+# Keep only requested root files
+!eslint.config.mjs
+!next.config.ts
+!package-lock.json
+!package.json
+!postcss.config.mjs
+!tsconfig.json
+!yarn.lock
